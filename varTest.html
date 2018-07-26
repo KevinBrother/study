@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		function sumArray(array) {
+			debugger
+			return array.reduce(sum);
+
+			function sum(a, b) {
+				return a + b;
+			}
+		}
+		//sumArray([5, 10, 8]); // => 23
+		
+		//闭包
+		function closure() {
+			var a = 999;
+			
+			return function() {
+				console.log(a) 
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+	</head>
+	<style>
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: #7FFFD4;
+		}
+	</style>
+	<body>
+		<div id="box"></div>
+		<button>123123</button>
+		
+	</body>
+	<script>
+		$("button").click(function() {
+			$("#box").css("background-color", "red")
+			setTimeout(() => {
+		    		$.ajax({
+		     type: "post",
+		     //@RequestMapping(value = "/checkoutFromDCD830M", produces = "text/plain")
+		 	 // http://localhost:8888/client/dev/checkoutFromDCD830M
+		     url: apphost() + "/client/dev/checkoutFromDCD830M",
+		     async: false,
+		     dataType: "json",
+		     success: function (data) {
+		    	 console.log(data)
+		    	 $(".md-modal").css("display","none");
+		    	 if (!right(data)) {
+		    		 return;
+		    	 }
+		    	 var checkout = data.result.checkout;
+		    	 
+		    	 if (checkout.succed){
+		    		 tip(checkout.type + "\n" + checkout.tip);
+		    		 execTimes = 21;
+		    	 }else{
+		    		 execTimes = 21;
+		    		 $(".btn-card").css("background-color","#efefef");
+		    		 $(".btn-card").css("color","black");
+		    		 $(".btn-card").attr("disabled",false);
+		    	 }
+		     }
+		}); 
+			}, 0)
+		})
+	</script>
+</html>

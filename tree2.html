@@ -1,0 +1,90 @@
+<html>
+ <head>
+ <title>jQuery treetable</title>
+ 
+		<link rel="stylesheet" href="css/jquery.treetable.css" />
+		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+      	<script type="text/javascript" src="js/jquery.treetable.js" ></script>
+      	<script type="text/javascript" src="js/jquery-ui-1.9.2.custom.js" ></script>
+ 
+ <script type="text/javascript">
+ $(document).ready(function(){
+     $("#example-advanced").treetable({
+             expandable : true
+         });
+         //选中行高光
+         $("#example-advanced tbody").on("mousedown", "tr", function() {
+ 
+             $(".selected").not(this).removeClass("selected");
+ 
+             $(this).toggleClass("selected");
+ 
+         });
+ });
+ 
+ </script>
+ 
+ </head>
+ 
+ 
+ <body>
+ <a href="#" onclick="jQuery('#example-advanced').treetable('expandAll'); return false;">展开</a>
+ 
+   <a href="#" onclick="jQuery('#example-advanced').treetable('collapseAll'); return false;">关闭</a>
+ 
+     <table id="example-advanced">
+         <tr data-tt-id="0">
+             <td><span class="folder">app</span></td>
+         </tr>
+         <tr data-tt-id="1" data-tt-parent-id="0">
+             <td><span class="folder">controllers</span></td>
+         </tr>
+         <tr data-tt-id="1-1" data-tt-parent-id="1">
+             <td><span class="file">application_controller.rb</span></td>
+         </tr>
+ 
+         <tr data-tt-id="2" data-tt-parent-id="0">
+             <td><span class="folder">helpers</span></td>
+         </tr>
+ 
+         <tr data-tt-id="2-1" data-tt-parent-id="2">
+             <td><span class="file">models</span></td>
+         </tr>
+         <tr data-tt-id="2-1" data-tt-parent-id="2">
+             <td><span class="file">views</span></td>
+         </tr>
+     </table>
+     
+     <script>
+     	
+     	// Drag & Drop Example Code
+	$("#example-advanced .file, #example-advanced .folder").draggable({
+	  helper: "clone",
+	  opacity: .75,
+	  refreshPositions: true,
+	  revert: "invalid",
+	  revertDuration: 300,
+	  scroll: true
+	});
+	
+	$("#example-advanced .folder").each(function() {
+	  $(this).parents("#example-advanced tr").droppable({
+	    accept: ".file, .folder",
+	    drop: function(e, ui) {
+	      var droppedEl = ui.draggable.parents("tr");
+	      $("#example-advanced").treetable("move", droppedEl.data("ttId"), $(this).data("ttId"));
+	    },
+	    hoverClass: "accept",
+	    over: function(e, ui) {
+	      var droppedEl = ui.draggable.parents("tr");
+	      if(this != droppedEl[0] && !$(this).is(".expanded")) {
+	        $("#example-advanced").treetable("expandNode", $(this).data("ttId"));
+	      }
+	    }
+	  });
+	});
+     	
+     </script>
+ </body>
+ </html>

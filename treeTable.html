@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/jquery.treetable.css" />
+		<link rel="stylesheet" href="css/jquery.treetable.theme.default.css" />
+		<script type="text/javascript" src="js/jquery-1.11.2.js" ></script>
+      	<script type="text/javascript" src="js/jquery.treetable.js" ></script>
+	</head>
+	<body>
+		
+      <table id="example-basic-expandable">
+        <tr data-tt-id="0">
+          <td>app</td>
+          <td>app</td>
+        </tr>
+        <tr data-tt-id="1" data-tt-parent-id="0">
+          <td>controllers</td>
+          <td>controllers</td>
+        </tr>
+        <tr data-tt-id="5" data-tt-parent-id="1">
+          <td>application_controller.rb</td>
+          <td>application_controller.rb</td>
+        </tr>
+        <tr data-tt-id="2" id="help" data-tt-parent-id="0">
+          <td>helpers</td>
+        </tr>
+         <tr data-tt-id="6" id="help2" data-tt-parent-id="2">
+          <td>helpers</td>
+        </tr>
+        <tr data-tt-id="3" data-tt-parent-id="0">
+          <td>models</td>
+          <td>models</td>
+        </tr>
+        <tr data-tt-id="4" data-tt-parent-id="0">
+          <td>views</td>
+          <td>views</td>
+        </tr>
+      </table>
+      
+      
+	       
+        
+      <script>
+      	$("#example-basic-expandable").treetable({ expandable: true });
+      	
+      	
+      	// Highlight selected row
+		$("#example-advanced tbody tr").mousedown(function() {
+		  $("tr.selected").removeClass("selected");
+		  $(this).addClass("selected");
+		});
+		  
+		// Drag & Drop Example Code
+		$("#example-advanced .file, #example-advanced .folder").draggable({
+		  helper: "clone",
+		  opacity: .75,
+		  refreshPositions: true,
+		  revert: "invalid",
+		  revertDuration: 300,
+		  scroll: true
+		});
+		  
+		$("#example-advanced .folder").each(function() {
+		  $(this).parents("tr").droppable({
+		    accept: ".file, .folder",
+		    drop: function(e, ui) {
+		      var droppedEl = ui.draggable.parents("tr");
+		      $("#example-advanced").treetable("move", droppedEl.data("ttId"), $(this).data("ttId"));
+		    },
+		    hoverClass: "accept",
+		    over: function(e, ui) {
+		      var droppedEl = ui.draggable.parents("tr");
+		      if(this != droppedEl[0] && !$(this).is(".expanded")) {
+		        $("#example-advanced").treetable("expandNode", $(this).data("ttId"));
+		      }
+		    }
+		  });
+		});
+      	
+      </script>
+	</body>
+</html>

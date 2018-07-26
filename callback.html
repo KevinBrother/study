@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var fn = function() {
+				debugger;
+				// 获取所有参数
+				var args = [].slice.call(arguments);
+
+				// 如果最后一个参数不是函数，则不继续执行下面的内容
+				var caller = args.pop();
+				if(typeof caller !== "function")
+					return;
+
+				// 接下来是对所有参数进行操作
+				//...
+				var data = 15	
+				// 假设操作完了之后的变量数组仍为args，把这些变量置入要执行的函数中
+				caller.call(this, data);
+				//caller.apply(this, [data]);
+			};
+			
+			
+			fn(123, function(data) {
+				console.log(data);
+			})
+			
+		</script>
+
+	</body>
+
+</html>

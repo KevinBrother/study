@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body{
+      background: #ccc;
+    }
+    .board{
+      width: 600px;
+      height: 600px;
+      background: #fff;
+      margin: 0 auto;
+      border: 1px solid #fff;
+    }
+    .head{
+      width: 200px;
+      height: 100px;
+      background: red;
+      margin: 40px auto 10px;
+      border-radius: 100px 100px 0 0 ;
+      position: relative;
+    }
+    .body{
+      width: 200px;
+      height: 150px;
+      background: red;
+      margin: 0 auto;
+      position: relative;
+      text-align: center;
+      line-height: 150px;
+      font-size: 40px;
+    }
+    .board .head>span{
+      width: 15px;
+      height: 15px;
+      background: #000;
+      display:inline-block;
+      border-radius: 100%;
+    }
+    .head>.l{
+      margin-left: 50px;
+      margin-top: 50px;
+      transition: all 0.2s;
+    }
+    .r{
+      margin-left: 70px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .head::before{
+      content: '';
+      display: block;
+      width: 7px;
+      height: 70px;
+      background: red;
+      position: absolute;
+      left: 36px;
+      top: -39px;
+      transform: rotate(120deg);
+      transition: all 0.2s;
+    }
+    .head::after{
+      content: '';
+      display: block;
+      width: 7px;
+      height: 70px;
+      background: red;
+      position: absolute;
+      right: 36px;
+      top: -39px;
+      transform: rotate(60deg);
+      transition: all 0.2s;
+    }
+    .body::before{
+      content: '';
+      display: block;
+      width: 60px;
+      height: 150px;
+      background: #000;
+      border-radius: 20px;
+      position: absolute;
+      left: -70px;
+      transition: all 0.2s;
+    }
+    .body::after{
+      content: '';
+      display: block;
+      width: 60px;
+      height: 150px;
+      background: #000;
+      border-radius: 20px;
+      position: absolute;
+      top: 4px;
+      right: -70px;
+      transition: all 0.2s;
+    }
+    .arms{
+      width: 200px;
+      height: 50px;
+      background: greenyellow;
+      margin: 0 auto;
+      position: relative;
+    }
+    .arms::before{
+      content: '';
+      display: block;
+      width: 50px;
+      height: 100px;
+      background: blue;
+      position: absolute;
+      left: 20px;
+      top: 50px;
+      transition: all 0.2s;
+    }
+    .arms::after{
+      content: '';
+      display: block;
+      width: 50px;
+      height: 100px;
+      background: blue;
+      position: absolute;
+      right: 20px;
+      top: 50px;
+      transition: all 0.2s;
+    }
+    .head:hover,.body:hover,.arms:hover{
+      
+    }
+    .move:hover .head::after{
+      transform: rotate(30deg);
+      transform-origin: left;
+    }
+    .move:hover .head::before{
+      transform: rotate(-10deg);
+      transform-origin: left;
+    }
+    .move:hover .body::after{
+      transform: rotate(300deg);
+      transform-origin: top;
+    }
+    .move:hover .body::before{
+      transform: rotate(900deg);
+      transform-origin: top;
+    }
+    .move:hover .arms::after{
+      transform: rotate(30deg);
+      transform-origin: top;
+    }
+    .move:hover .arms::before{
+      transform: rotate(30deg);
+      transform-origin: top;
+    }
+    .move:hover .l{
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div class="board">
+        <div class="move">
+            <div class="head" >
+                <span class="l"></span>
+                <span class="r"></span>
+            </div>
+            <div class="body">卡布达</div>
+            <div class="arms"></div>
+        </div>
+    </div>
+</body>
+</html>

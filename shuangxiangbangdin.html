@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<body>
+		<div id="app">
+		<!--	<input type="text" v-model="message" id="a"/>
+			<span id="b" >{{message}}</span>-->
+			<input type="text" v-model="message" id="a"/>
+			{{message}}
+		</div>
+		
+		
+		<script>
+			/*var obj = {};
+			Object.defineProperty(obj, "Hello", {
+				get: function() {return sth},
+				set: function(val) {do sth}
+			});*/
+			
+			
+			//极简双向绑定的实现
+		/*	var obj = {};
+			Object.defineProperty(obj, 'hello', {
+				set: function(newVal) {
+					document.getElementById('a').value = newVal;
+					document.getElementById('b').innerHTML = newVal;
+				}
+			});
+			
+			document.addEventListener('keyup', function(e) {
+				obj.hello = e.target.value;
+			});*/
+		/*	发布者发出通知 => 主题对象收到通知并推送给订阅者 => 订阅者执行相应操作*/
+			
+			function defineReactive(obj, key, val) {
+				
+				var dep = new Dep();
+				
+				Object.defineProperty(obj, key, {
+					get: function() {
+						
+						//添加订阅者wather到主题对象Dep
+						if(Dep.target) dep.addSub(Dep.target);
+						return val;
+					},
+					set: function(newVal) {
+						if(newVal === val) return;
+						val = newVal;
+						console.log(val);
+						
+						//做为发布者发出通知
+						dep.notify();
+					}
+				});
+			}
+			
+			function observe(obj, vm) {
+				Object.keys(obj).forEach(function(key) {
+					defineReactive(vm, key, obj[key]);
+				})
+			}
+			
+			
+			//DocumentFragment
+			function Vue(options) {
+				this.data = options.data;
+				var data = this.data;
+				
+				observe(data, this)
+				
+				var id = options.el;
+				var dom = nodeToFragment(document.getElementById(id), this);
+				console.log(dom)
+				//编译完成后，将dom返回到app中
+				document.getElementById('app').appendChild(dom);
+			}
+			
+			
+			function nodeToFragment(node, vm) {
+				var flag = document.createDocumentFragment();
+				var child;
+				while (child = node.firstChild) {
+					compile(child, vm);						
+					flag.appendChild(child);
+				}
+				return flag;
+			}
+			
+			function compile(node, vm) {
+				var reg = /\{\{(.*)\}\}/;
+				
+				//节点类型为元素
+				if(node.nodeType === 1) {
+					var attr = node.attributes;
+					
+					//解析属性
+					for(var i = 0; i < attr.length; i++) {
+						if(attr[i].nodeName == 'v-model') {
+							var name = attr[i].nodeValue;//获取v-model属性绑定的属性名
+							
+							node.addEventListener('input', function(e) {
+								vm[name] = e.target.value;
+							})
+							
+							node.value = vm.data[name];//将data的值赋给该node
+							node.removeAttribute('v-model');
+						}else if(reg.test(node.nodeValue)) {
+							var name = RegExp.$1;//获取匹配到的字符串
+							name = name.trim();
+							//node.nodeValue = vm.data[name];
+							//node.nodeValue = vm[name];
+							new Watcher(vm, node, name);
+						}
+					};
+				}
+				
+				//节点类型为3
+				if(node.nodeType === 3) {
+					if(reg.test(node.nodeValue)) {
+						var name = RegExp.$1;//获取匹配到的字符串
+						name = name.trim();
+						//node.nodeValue = vm.data[name];
+						//node.nodeValue = vm[name];
+						new Watcher(vm, node, name);
+					}
+				}
+			}
+			
+			function Watcher(vm, node, name) {
+				Dep.target = this;
+				this.name = name;
+				this.node = node;
+				this.vm = vm;
+				this.update();
+				Dep.target = null;
+			}
+			
+			Watcher.prototype = {
+				update: function () {
+					this.get();
+					this.node.nodeValue = this.value;
+				},
+				//获取data中的属性
+				get: function() {
+					this.value = this.vm[this.name];//触发相应属性的get
+				}
+			}
+			
+			function Dep() {
+				this.subs = [];
+			}
+			
+			Dep.prototype = {
+				addSub: function(sub) {
+					this.subs.push(sub);
+				},
+				
+				notify: function() {
+					this.subs.forEach(function(sub) {
+						sub.update();
+					})
+				}
+			}
+ 			
+			var vm = new Vue({
+				el: 'app',
+				data: {
+					message: 'hello world'
+				}
+			})
+			
+			
+		</script>
+	</body>
+</html>
