@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				background: #f0fcff url(../img/boat/island.png) repeat-x 100% -460px;
+				animation: bgmove 8s ease-in forwards;
+			}
+			
+			.boat {
+				width: 300px;
+				height: 200px;
+				position: relative;
+				top: 300px;
+				left: 400px;
+				animation: shake 2s linear infinite;
+			}
+			
+			.boat:after {
+				content: "";
+				display: block;
+				width: 100px;
+				height: 100px;
+				background-size: 100px;
+				background-image: url(../img/boat/steam.png);
+				position: absolute;
+				top: -30px;
+				opacity: 0;
+				animation: steam 4s 2s infinite;
+			}
+			
+			.mike {
+				width: 100px;
+				height: 50px;
+				position: relative;
+				top: 300px;
+				left: -100px;
+				animation: show-mike 2s ease-in-out 6s forwards, shake 2s linear 6s infinite;
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			@keyframes bgmove {
+				from {
+					background-position-x: 100%;
+				}
+				to {
+					background-position-x: -350%;
+				}
+			}
+			
+			@keyframes show-mike {
+				from {
+					left: -100px;
+				}
+				to {
+					left: 100px;
+				}
+			}
+			
+			@keyframes shake {
+				50% {
+					transform: rotateZ(-10deg);
+					transform-origin: 80% center;
+				}
+			}
+			
+			@keyframes steam {
+				40%,
+				60% {
+					opacity: .8;
+				}
+				100% {
+					-webkit-transform: translate(-15%, -35%) rotateZ(20deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="boat">
+			<img src="../img/boat/boat.png" />
+		</div>
+		<div class="mike">
+			<img src="../img/boat/mike.png" />
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				perspective: 300px;
+			}
+		
+			div {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: relative;
+				text-align: center;
+				line-height: 100px;
+				margin: 20px;
+				color: white;
+			}
+			
+			.transition {
+				transition: width 2s;
+			}
+			
+			.transition:hover {
+				width: 300px;
+			} 
+			
+			.animation {
+				animation: myfirst 5s infinite;
+				-webkit-animation: myfirst 5s infinite;
+			}
+			
+			@keyframes myfirst{
+				0% {background: red; color: white;}
+				50% {background: yellow; color: red;}
+				100% {background: red; color: white;}
+			}
+			
+			@-webkit-keyframes myfirst{  /* Safari and Chrome */
+				0% {background: red; color: white;}
+				50% {background: yellow; color: red;}
+				100% {background: red; color: white;}
+			}
+			
+			.animation2 {
+				animation: mysecond 5s linear infinite;
+			}
+			
+			@keyframes mysecond{
+				0% {
+					background: red; left: 0px; top: 0px;
+				}
+				25% {
+					background: yellow; left: 100px; top: 0px;
+				}
+				50% {
+					background: green; left: 100px; top: 100px;
+				}
+				75% {
+					background: blue; left: 0px; top:100px;
+				}
+				100% {
+					background: purple; left: 0px; top: 0px;
+				}
+			}
+			
+			.transform1 {
+				transform: rotateY(50deg);
+			}
+			
+			.transform2 {
+				transform: rotateY(-50deg) translateZ(10px);
+				background: blue;
+			}
+			
+			.loading {
+				border-radius: 50%;
+				background: ghostwhite;
+				border: 6px solid grey;
+				animation: dount 2s linear infinite;
+				border-bottom-color: #1395ba;
+			}
+			
+			@keyframes dount{
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+				/*from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}*/
+			}
+			
+			.beat_bod {
+				border-radius: 50%;
+				background: ghostwhite;
+				border: 6px solid grey;
+				animation: beatBord 2s infinite;
+			}
+			
+			@keyframes beatBord{
+				0% {border: 6px solid red;}
+				50% {border: 10px solid yellow;}
+				100% {border: 14px solid blue;}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="transition">白露tsition1</div>
+		
+		<div class="animation">白露animat1</div>
+		
+		<div class="animation2">白露animat2</div>
+		
+		<div class="transform1">白露tsiform1</div>
+		<div class="transform2">白露tsiform2</div>
+		
+		<div class="loading"></div>
+		
+		<div class="beat_bod"></div>
+	</body>
+</html>
