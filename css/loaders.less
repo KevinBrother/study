@@ -1,0 +1,61 @@
+@color: green;
+@span_wh: 50px;
+
+.load_1 {
+    
+}
+
+span {
+    width: @span_wh;
+    height: @span_wh;
+    display: inline-block;
+    border-radius: @span_wh;
+    background: @color;
+}
+
+// loop
+.generate_span1(3);
+
+.generate_span1(@n, @i: 1) when (@i =< @n) {
+    .load_1 span:nth-child(@{i}) {
+        
+        animation: scale 1s (@i * 0.1s) infinite;
+    }
+    
+    .generate_span1(@n, @i + 1);
+}
+
+.load_2 span {
+    animation: roateY 4s 0.3s infinite cubic-bezier(0.650, 0.030, 0.735, 0.045);
+}
+
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0.9, 0.9);
+    background: #93e1d7;
+  }
+  50% {
+    transform: scale(1, 1);
+    margin: 0 30px;
+    background: #2fac9b;
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes roateY {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
