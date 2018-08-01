@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				text-align: center;
+			}
+			
+			/*.item {
+			  height: 100px;
+				transform-style: preserve-3d;
+				transition: transform .6s;
+			}
+  
+		.item:hover {
+		  transform: translateZ(-50px) rotateX(95deg);
+		}
+   
+		.item img {
+		   display: block;
+		   position: absolute;
+		   top: 0;
+		   border-radius: 3px;
+		   box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
+		   transform: translateZ(50px);
+		   transition: all .6s;
+		   width: 310px; 
+		   height: 100px;
+		 }
+    
+	 .item .information {
+	   display: block;
+	   position: absolute;
+	   top: 0;
+	   height: 80px;
+	   width: 290px;
+	   text-align: left;
+	   border-radius: 15px;
+	   padding: 10px;
+	   font-size: 12px;
+	   text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+	   box-shadow: none;
+	   background: rgb(236,241,244);
+	    transform: rotateX(-90deg) translateZ(50px);
+	    transition: all .6s;
+	 }*/
+
+			
+			
+			.wrap {
+				display: inline-block;
+				margin: 10px 5px;
+				cursor: pointer;
+				background: red;
+				position: relative;
+				perspective: 400px;
+			}
+			
+			.item {
+				transition: all 1s;
+				width: 200px;
+				height: 120px;
+				transform-style: preserve-3d;
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				transform: translateZ(50px);
+			}
+			.cont {
+				width: 90%;
+				height: 60%;
+				transform: rotateX(-90deg) translateZ(50px);
+				position: absolute;
+				 padding: 10px;
+				background: rgb(236,241,244);
+				top: 0;
+			}
+			
+			.cont strong {
+				display: block;
+				text-align: left;
+			} 
+			
+			.item:hover {
+				transform: translateZ(-50px) rotateX(95deg);
+			}
+			
+			.item:hover img {
+			  box-shadow: none;
+			  border-radius: 15px;
+			}
+			      
+			.item:hover .cont {
+			  box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
+			  border-radius: 3px;
+			 }
+			
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<h1>CSS3 3D变形制作视频展示区</h1>
+			<div class="wrap">
+				<div class="item">
+					<img src="../img/1.jpg"/>
+					<div class="cont">
+						<strong>澳门风云</strong>
+						    闻名中外，曾担任美国赌场保安总顾问的魔术手石一坚，终回流澳门退休，
+						    更宴请各方朋友到来庆祝生日宴.
+					</div>
+				</div>
+			</div>
+			<!--<div class="wrap">
+				<div class="item">
+					<img src="../img/2.jpg"/>
+					<span class="cont">
+						<strong>澳门风云</strong>
+						    闻名中外，曾担任美国赌场保安总顾问的魔术手石一坚，终回流澳门退休，
+						    更宴请各方朋友到来庆祝生日宴.
+					</span>
+				</div>
+			</div>-->
+		</div>
+	</body>
+</html>
