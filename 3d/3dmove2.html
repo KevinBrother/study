@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				margin: 5em;
+				text-align: center;
+				color: #414142;
+				background: rgb(246,241,232);
+			}
+			
+			h1 {
+				font-size: 25px;
+				font-weight: normal;
+				margin: 2em auto;
+			}
+			
+			.container {
+				margin: 0 auto;
+			}
+			
+			.wrapper {
+				display: inline-block;
+				width: 310px;
+			    height: 100px;
+			    vertical-align: top;
+			    margin: 1em 1.5em 2em 0;
+			    cursor: pointer;
+			    position: relative;
+				perspective: 4000px;
+			}
+			
+			.item {
+				height: 100px;
+				transition: all 1s;
+				transform-style: preserve-3d;	
+			}
+			
+			img {
+				width: 310px;
+				height: 100px;
+				position: absolute;
+				top: 0;
+				
+				transform: translateZ(50px);
+			}
+			
+			strong {
+				display: block;
+			}
+			
+			.information {
+				width: 290px;
+				height: 80px;
+				
+				background: rgb(236,241,244);
+				opacity: 0.4;
+				text-align: left;
+				padding: 10px;
+				position: absolute;
+				top: 0;
+				
+				transform: rotateX(-90deg) translateZ(50px);
+			}
+			
+			.item:hover {
+				transform: rotateX(95deg) translateZ(-50px);
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>CSS3 3D变形制作视频展示区</h1>
+			<div class="wrapper">
+				<div class="item">
+					<img src="../img/1.jpg" />
+					<span class="information">
+						<strong>奥运风云</strong>
+						闻名中外，曾担任美国赌场保安总顾问的魔术手石一坚，终回流澳门退休，
+						更宴请各方朋友到来庆祝生日宴.
+					</span>
+				</div>
+			</div>
+		</div>	
+	</body>
+</html>
